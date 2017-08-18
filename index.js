@@ -10,14 +10,30 @@ const
 if (authors) {
     inquirer.prompt([
         {
-            name: 'q1',
+            name: 'author',
             message: 'Which author details would you like to use with this repository?',
             type: 'list',
             choices
+        },
+        {
+            name: 'action',
+            message: 'What would you like to do?',
+            type: 'list',
+            choices: [
+                'Add author',
+                'Remove authors'
+            ],
+            when: answers => answers.author === 'Manage authors...'
         }
-    ]).then(console.log).catch(console.error);
+    ]).then(answers => {
+        if (answers.action) {
+            console.log('TODO: Take action when user wants to manage authors...');
+        } else {
+            console.log('TODO: Set git author for current repository...');
+        }
+    }).catch(console.error);
 } else {
-    console.log('No authors found!')
+    console.log('No authors found!');
     inquirer.prompt([
         {
             name: 'createConfig',
@@ -57,8 +73,7 @@ function createChoices(authors) {
         }).concat(
             [
                 new inquirer.Separator(),
-                'Add new author...',
-                'Remove author...'
+                'Manage authors...'
             ]
         );
     }

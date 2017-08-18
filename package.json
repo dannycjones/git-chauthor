@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/dannycjones/git-author-switcher#readme",
   "dependencies": {
-    "inquirer": "^3.2.2"
+    "inquirer": "^3.2.2",
+    "simple-git": "^1.75.0"
   }
 }

@@ -1,5 +1,6 @@
 const
     fs = require('fs'),
+    git = require('simple-git')(),
     inquirer = require('inquirer');
 
 const
@@ -29,7 +30,9 @@ if (authors) {
         if (answers.action) {
             console.log('TODO: Take action when user wants to manage authors...');
         } else {
-            console.log('TODO: Set git author for current repository...');
+            git.addConfig('user.name', answers.author.name);
+            git.addConfig('user.email', answers.author.email);
+            console.log('Git author config set.');
         }
     }).catch(console.error);
 } else {

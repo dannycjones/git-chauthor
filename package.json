@@ -1,0 +1,26 @@
+{
+  "name": "git-author-switcher",
+  "version": "0.1.0",
+  "description": "A CLI to easily set the git author details for a repository",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannycjones/git-author-switcher.git"
+  },
+  "keywords": [
+    "git",
+    "author",
+    "cli",
+    "switch",
+    "committer"
+  ],
+  "author": "Daniel Carl Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dannycjones/git-author-switcher/issues"
+  },
+  "homepage": "https://github.com/dannycjones/git-author-switcher#readme"
+}

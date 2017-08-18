@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/dannycjones/git-author-switcher/issues"
   },
-  "homepage": "https://github.com/dannycjones/git-author-switcher#readme"
+  "homepage": "https://github.com/dannycjones/git-author-switcher#readme",
+  "dependencies": {
+    "inquirer": "^3.2.2"
+  }
 }

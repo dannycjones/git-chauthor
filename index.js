@@ -17,15 +17,26 @@ if (authors) {
         }
     ]).then(console.log).catch(console.error);
 } else {
-    console.log('No authors defined.');
+    console.log('No authors found!')
+    inquirer.prompt([
+        {
+            name: 'createConfig',
+            message: 'Would you like to create a new authors config file?',
+            type: 'confirm',
+            default: true
+        }
+    ]).then(answers => {
+        if (answers.createConfig) {
+            console.log('TODO: Show prompts for creating config...');
+        }
+    }).catch(console.error);
 }
 
 function loadConfig() {
     if (fs.existsSync(configFilePath)) {
         return JSON.parse(fs.readFileSync(configFilePath));
-    } else {
-        console.log('No config file found');
     }
+    return false;
 }
 
 function createChoices(authors) {

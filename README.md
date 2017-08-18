@@ -1,4 +1,6 @@
-# git-author-switcher
+# git-chauthor
+
+_git-ch(ange)author..._
 
 This is a command line tool that enables you to easily set the author for a project.
 

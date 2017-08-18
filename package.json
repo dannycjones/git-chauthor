@@ -1,17 +1,17 @@
 {
-  "name": "git-author-switcher",
-  "version": "0.1.0",
-  "description": "A CLI to easily set the git author details for a repository",
+  "name": "git-chauthor",
+  "version": "0.2.0",
+  "description": "A CLI to easily set/change the git author details for a repository",
   "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "git-author-switcher": "bin/index.js"
+    "chauthor": "bin/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dannycjones/git-author-switcher.git"
+    "url": "git+https://github.com/dannycjones/git-chauthor.git"
   },
   "keywords": [
     "git",
@@ -21,11 +21,11 @@
     "committer"
   ],
   "author": "Daniel Carl Jones",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dannycjones/git-author-switcher/issues"
+    "url": "https://github.com/dannycjones/git-chauthor/issues"
   },
-  "homepage": "https://github.com/dannycjones/git-author-switcher#readme",
+  "homepage": "https://github.com/dannycjones/git-chauthor#readme",
   "dependencies": {
     "inquirer": "^3.2.2",
     "simple-git": "^1.75.0"

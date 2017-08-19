@@ -2,12 +2,12 @@
   "name": "git-chauthor",
   "version": "0.2.0",
   "description": "A CLI to easily set/change the git author details for a repository",
-  "main": "bin/index.js",
+  "main": "bin/chauthor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "chauthor": "bin/index.js"
+    "chauthor": "bin/chauthor.js"
   },
   "repository": {
     "type": "git",

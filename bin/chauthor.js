@@ -1,13 +1,12 @@
 #! /usr/bin/env node
 
 const
-    fs = require('fs'),
     git = require('simple-git')(),
-    inquirer = require('inquirer');
+    inquirer = require('inquirer'),
+    config = require('../config.js');
 
 const
-    configFilePath = process.env.HOME + '/.gitauthors.json',
-    authors = loadConfig(),
+    authors = config.load(),
     choices = createChoices(authors);
 
 if (authors) {
@@ -51,13 +50,6 @@ if (authors) {
             console.log('TODO: Show prompts for creating config...');
         }
     }).catch(console.error);
-}
-
-function loadConfig() {
-    if (fs.existsSync(configFilePath)) {
-        return JSON.parse(fs.readFileSync(configFilePath));
-    }
-    return false;
 }
 
 function createChoices(authors) {

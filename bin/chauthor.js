@@ -26,10 +26,35 @@ if (authors) {
                 'Remove authors'
             ],
             when: answers => answers.author === 'Manage authors...'
+        },
+        {
+            name: 'name',
+            message: 'Author name:',
+            when: answers => answers.action === 'Add author'
+        },
+        {
+            name: 'email',
+            message: 'Author email:',
+            when: answers => answers.action === 'Add author'
+        },
+        {
+            name: 'alias',
+            message: 'Author alias:',
+            when: answers => answers.action === 'Add author'
         }
     ]).then(answers => {
         if (answers.action) {
-            console.log('TODO: Take action when user wants to manage authors...');
+            switch (answers.action) {
+                case 'Add author':
+                    authors.push({
+                        alias: answers.alias,
+                        email: answers.email,
+                        name: answers.name
+                    });
+                    config.save(authors);
+                default:
+                    console.log('TODO: Take action when user wants to manage authors...');
+            }
         } else {
             git.addConfig('user.name', answers.author.name);
             git.addConfig('user.email', answers.author.email);

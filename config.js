@@ -9,6 +9,11 @@ function load() {
     return null;
 }
 
+function save(configData) {
+    fs.writeFileSync(configFilePath, JSON.stringify(configData, null, 2) + '\n');
+}
+
 module.exports = {
-    load
+    load,
+    save
 };

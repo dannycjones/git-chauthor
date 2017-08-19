@@ -47,7 +47,7 @@ if (authors) {
         }
     ]).then(answers => {
         if (answers.createConfig) {
-            console.log('TODO: Show prompts for creating config...');
+            config.save([]);
         }
     }).catch(console.error);
 }

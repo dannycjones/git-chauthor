@@ -3,11 +3,12 @@
 const
     git = require('simple-git')(),
     inquirer = require('inquirer'),
+    _ = require('lodash'),
     config = require('../config.js');
 
 const
     authors = config.load(),
-    choices = createChoices(authors);
+    authorChoices = createChoices(authors);
 
 if (authors) {
     inquirer.prompt([
@@ -15,7 +16,10 @@ if (authors) {
             name: 'author',
             message: 'Which author details would you like to use with this repository?',
             type: 'list',
-            choices
+            choices: authorChoices.concat([
+                new inquirer.Separator(),
+                'Manage authors...'
+            ])
         },
         {
             name: 'action',
@@ -52,8 +56,21 @@ if (authors) {
                         name: answers.name
                     });
                     config.save(authors);
+                    break;
+                case 'Remove authors':
+                    inquirer.prompt([{
+                        name: 'authors',
+                        message: 'Which authors should be removed?',
+                        type: 'checkbox',
+                        choices: authorChoices
+                    }]).then(answers => {
+                        _.pullAll(authors, answers.authors);
+                        config.save(authors);
+                    }).catch(console.error);
+                    break;
                 default:
                     console.log('TODO: Take action when user wants to manage authors...');
+                    break;
             }
         } else {
             git.addConfig('user.name', answers.author.name);
@@ -87,17 +104,9 @@ function createChoices(authors) {
 
             return {
                 name: author.alias || `${author.name} <${author.email}>`,
-                value: {
-                    email: author.email,
-                    name: author.name
-                }
+                value: author
             };
-        }).concat(
-            [
-                new inquirer.Separator(),
-                'Manage authors...'
-            ]
-        );
+        });
     }
 
     return choices;

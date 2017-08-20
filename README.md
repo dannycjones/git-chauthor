@@ -6,7 +6,9 @@ This is a command line tool that enables you to easily set the author for a proj
 
 ## How to use
 
-Currently you need to manually create the config yourself. See config section.
+I recommend installing this package globally so that you can use it in any directory with just `chauthor`.
+
+Follow the interface to create your configuration file. You will need to run it once to create the config file, then again to start adding author details. For more info about the file itself, see the config section.
 
 With config setup, simply run `chauthor` in a git repository. A simple list selector will appear with all the available author details. Upon selecting, the changes will be made immediately.
 
@@ -41,6 +43,8 @@ For example, my config file looks something like this:
 ```
 
 ## Known issues
+
+If you find a problem, feel free to submit an issue on the GitHub repository.
 
 - Does not handle not being in a Git repository very well
 - Does not handle malformed config very well

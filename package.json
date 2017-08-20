@@ -1,6 +1,6 @@
 {
   "name": "git-chauthor",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A CLI to easily set/change the git author details for a repository",
   "main": "bin/chauthor.js",
   "scripts": {

@@ -43,6 +43,6 @@ For example, my config file looks something like this:
 ## Known issues
 
 - Does not handle not being in a Git repository very well
-- No way to modify config without manually doing so
+- Does not handle malformed config very well
 - No tests
 - No way of interacting with signing keys

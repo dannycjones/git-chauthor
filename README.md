@@ -44,9 +44,6 @@ For example, my config file looks something like this:
 
 ## Known issues
 
-If you find a problem, feel free to submit an issue on the GitHub repository.
+I've created a few known issues in the issues tab on GitHub.
 
-- Does not handle not being in a Git repository very well
-- Does not handle malformed config very well
-- No tests
-- No way of interacting with signing keys
+If you find other problems, feel free to submit an issue on the GitHub repository.

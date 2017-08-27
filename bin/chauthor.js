@@ -17,8 +17,9 @@ function main() {
                 manageRepoAuthor();
             } else {
                 console.log('You are not in a git repository.');
+                manageAuthors();
             }
-        });
+        }).catch(console.error);
     } else {
         console.log('No authors found!');
         inquirer.prompt([
@@ -55,7 +56,9 @@ function createChoices(authors) {
 }
 
 function checkInRepo() {
-    return git.silent(true).raw(['rev-parse', '--is-inside-work-tree']);
+    return new Promise((resolve, reject) => {
+        return git.silent(true).raw(['rev-parse', '--is-inside-work-tree']).then(() => resolve(true), () => resolve(false));
+    });
 }
 
 main();
@@ -68,7 +71,9 @@ function manageAuthors() {
             type: 'list',
             choices: [
                 'Add author',
-                'Remove authors'
+                'Remove authors',
+                new inquirer.Separator(),
+                'Nothing'
             ]
         },
         {
@@ -88,6 +93,8 @@ function manageAuthors() {
         }
     ]).then(answers => {
         switch (answers.action) {
+            case 'Cancel':
+                break;
             case 'Add author':
                 authors.push({
                     alias: answers.alias,
@@ -106,9 +113,6 @@ function manageAuthors() {
                     _.pullAll(authors, answers.authors);
                     config.save(authors);
                 }).catch(console.error);
-                break;
-            default:
-                console.log('TODO: Take action when user wants to manage authors...');
                 break;
         }
     }).catch(console.error);

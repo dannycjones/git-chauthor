@@ -2,9 +2,10 @@
 
 const git = require('simple-git/promise')();
 const inquirer = require('inquirer');
-const _ = require('lodash');
+
 const config = require('../config.js');
 const createAuthorView = require('../views/createAuthor.js');
+const deleteAuthorsView = require('../views/deleteAuthors.js');
 
 const authors = config.load();
 const authorChoices = createChoices(authors);
@@ -81,15 +82,7 @@ function manageAuthors() {
             createAuthorView.catch(console.error);
             break;
         case 'Remove authors':
-            inquirer.prompt([{
-                name: 'authors',
-                message: 'Which authors should be removed?',
-                type: 'checkbox',
-                choices: authorChoices
-            }]).then((res) => {
-                _.pullAll(authors, res.authors);
-                config.save(authors);
-            }).catch(console.error);
+            deleteAuthorsView.catch(console.error);
             break;
         }
     }).catch(console.error);

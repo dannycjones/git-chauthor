@@ -4,6 +4,7 @@ const git = require('simple-git/promise')();
 const inquirer = require('inquirer');
 const _ = require('lodash');
 const config = require('../config.js');
+const createAuthorView = require('../views/createAuthor.js');
 
 const authors = config.load();
 const authorChoices = createChoices(authors);
@@ -71,33 +72,13 @@ function manageAuthors() {
                 new inquirer.Separator(),
                 'Nothing'
             ]
-        },
-        {
-            name: 'name',
-            message: 'Author name:',
-            when: answers => answers.action === 'Add author'
-        },
-        {
-            name: 'email',
-            message: 'Author email:',
-            when: answers => answers.action === 'Add author'
-        },
-        {
-            name: 'alias',
-            message: 'Author alias:',
-            when: answers => answers.action === 'Add author'
         }
     ]).then((answers) => {
         switch (answers.action) {
         case 'Cancel':
             break;
         case 'Add author':
-            authors.push({
-                alias: answers.alias,
-                email: answers.email,
-                name: answers.name
-            });
-            config.save(authors);
+            createAuthorView.catch(console.error);
             break;
         case 'Remove authors':
             inquirer.prompt([{

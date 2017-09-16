@@ -4,7 +4,8 @@
   "description": "A CLI to easily set/change the git author details for a repository",
   "main": "bin/chauthor.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged"
   },
   "bin": {
     "chauthor": "bin/chauthor.js"
@@ -30,5 +31,26 @@
     "inquirer": "^3.2.2",
     "lodash": "^4.17.4",
     "simple-git": "^1.75.0"
+  },
+  "devDependencies": {
+    "eclint": "^2.4.3",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.4"
+  },
+  "lint-staged": {
+    "!*.{js}": [
+    "eclint fix",
+    "git add"
+    ],
+    "*.js": [
+    "eslint --fix",
+    "git add"
+    ]
   }
 }

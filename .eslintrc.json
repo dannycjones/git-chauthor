@@ -1,0 +1,21 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": false
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "root": true,
+  "extends": "airbnb-base",
+  "rules": {
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "indent": ["error", 4],
+    "comma-dangle": ["error", "never"],
+    "no-use-before-define": ["off"],
+    "no-console": ["off"],
+    "default-case": ["off"]
+  }
+}

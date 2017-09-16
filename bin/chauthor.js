@@ -1,18 +1,16 @@
 #! /usr/bin/env node
 
-const
-    git = require('simple-git/promise')(),
-    inquirer = require('inquirer'),
-    _ = require('lodash'),
-    config = require('../config.js');
+const git = require('simple-git/promise')();
+const inquirer = require('inquirer');
+const _ = require('lodash');
+const config = require('../config.js');
 
-const
-    authors = config.load(),
-    authorChoices = createChoices(authors);
+const authors = config.load();
+const authorChoices = createChoices(authors);
 
 function main() {
     if (authors) {
-        checkInRepo().then(inRepo => {
+        checkInRepo().then((inRepo) => {
             if (inRepo) {
                 manageRepoAuthor();
             } else {
@@ -29,7 +27,7 @@ function main() {
                 type: 'confirm',
                 default: true
             }
-        ]).then(answers => {
+        ]).then((answers) => {
             if (answers.createConfig) {
                 config.save([]);
             }
@@ -37,13 +35,13 @@ function main() {
     }
 }
 
-function createChoices(authors) {
+function createChoices(authorsForChoices) {
     let choices;
 
-    if (authors) {
-        choices = authors.map(author => {
-            if (typeof author.email !== 'string') { throw new Error('Expected type string for email') }
-            if (typeof author.name !== 'string') { throw new Error('Expected type string for name') }
+    if (authorsForChoices) {
+        choices = authorsForChoices.map((author) => {
+            if (typeof author.email !== 'string') { throw new Error('Expected type string for email'); }
+            if (typeof author.name !== 'string') { throw new Error('Expected type string for name'); }
 
             return {
                 name: author.alias || `${author.name} <${author.email}>`,
@@ -56,9 +54,7 @@ function createChoices(authors) {
 }
 
 function checkInRepo() {
-    return new Promise((resolve, reject) => {
-        return git.silent(true).raw(['rev-parse', '--is-inside-work-tree']).then(() => resolve(true), () => resolve(false));
-    });
+    return new Promise(resolve => git.silent(true).raw(['rev-parse', '--is-inside-work-tree']).then(() => resolve(true), () => resolve(false)));
 }
 
 main();
@@ -91,29 +87,29 @@ function manageAuthors() {
             message: 'Author alias:',
             when: answers => answers.action === 'Add author'
         }
-    ]).then(answers => {
+    ]).then((answers) => {
         switch (answers.action) {
-            case 'Cancel':
-                break;
-            case 'Add author':
-                authors.push({
-                    alias: answers.alias,
-                    email: answers.email,
-                    name: answers.name
-                });
+        case 'Cancel':
+            break;
+        case 'Add author':
+            authors.push({
+                alias: answers.alias,
+                email: answers.email,
+                name: answers.name
+            });
+            config.save(authors);
+            break;
+        case 'Remove authors':
+            inquirer.prompt([{
+                name: 'authors',
+                message: 'Which authors should be removed?',
+                type: 'checkbox',
+                choices: authorChoices
+            }]).then((res) => {
+                _.pullAll(authors, res.authors);
                 config.save(authors);
-                break;
-            case 'Remove authors':
-                inquirer.prompt([{
-                    name: 'authors',
-                    message: 'Which authors should be removed?',
-                    type: 'checkbox',
-                    choices: authorChoices
-                }]).then(answers => {
-                    _.pullAll(authors, answers.authors);
-                    config.save(authors);
-                }).catch(console.error);
-                break;
+            }).catch(console.error);
+            break;
         }
     }).catch(console.error);
 }
@@ -129,7 +125,7 @@ function manageRepoAuthor() {
                 'Manage authors...'
             ])
         }
-    ]).then(answers => {
+    ]).then((answers) => {
         if (answers.author !== 'Manage authors...') {
             Promise.all([
                 git.addConfig('user.name', answers.author.name),

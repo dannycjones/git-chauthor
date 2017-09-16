@@ -1,6 +1,6 @@
-const 
-    fs = require('fs'),
-    configFilePath = process.env.HOME + '/.gitauthors.json';
+const fs = require('fs');
+
+const configFilePath = `${process.env.HOME}/.gitauthors.json`;
 
 function load() {
     if (fs.existsSync(configFilePath)) {
@@ -10,7 +10,7 @@ function load() {
 }
 
 function save(configData) {
-    fs.writeFileSync(configFilePath, JSON.stringify(configData, null, 2) + '\n');
+    fs.writeFileSync(configFilePath, `${JSON.stringify(configData, null, 2)}\n`);
 }
 
 module.exports = {

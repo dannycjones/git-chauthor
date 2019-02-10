@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/dannycjones/git-chauthor#readme",
   "dependencies": {
-    "inquirer": "^4.0.1",
-    "lodash": "^4.17.11",
-    "simple-git": "^1.107.0"
+    "inquirer": ">=4.0.1",
+    "lodash": ">=4.17.11",
+    "simple-git": ">=1.107.0"
   }
 }

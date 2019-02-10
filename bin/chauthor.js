@@ -12,7 +12,7 @@ const
 
 function main() {
     if (authors) {
-        checkInRepo().then(inRepo => {
+        git.checkIsRepo().then(inRepo => {
             if (inRepo) {
                 manageRepoAuthor();
             } else {
@@ -53,12 +53,6 @@ function createChoices(authors) {
     }
 
     return choices;
-}
-
-function checkInRepo() {
-    return new Promise((resolve, reject) => {
-        return git.silent(true).raw(['rev-parse', '--is-inside-work-tree']).then(() => resolve(true), () => resolve(false));
-    });
 }
 
 main();
